@@ -4,7 +4,7 @@ go 1.26.7
 
 require (
 	buf.build/gen/go/bufbuild/protodescriptor/protocolbuffers/go v1.36.12-20250109164928-1da0de137947.1
-	github.com/bmatcuk/doublestar/v4 v4.10.0
+	github.com/bmatcuk/doublestar/v4 v4.10.4
 	github.com/google/go-cmp v0.7.0
 	github.com/petermattis/goid v0.0.0-20260716134002-a9b348f0a2b9
 	github.com/pmezard/go-difflib v1.0.0
