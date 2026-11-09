@@ -1,0 +1,67 @@
+error: message field `buf.test.Foo.x1` set multiple times
+  --> testdata/options/values/singular.proto:10:5
+   |
+ 9 |     x1: 1,
+   |     -- first set here...
+10 |     x1: 2, // Setting more than once is an error.
+   |     ^^ ... also set here
+...
+20 |     optional int32 x1 = 1;
+   |                    -- not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: mismatched types
+  --> testdata/options/values/singular.proto:12:9
+   |
+12 |     x2: [-1, 1], // Setting from an array is an error.
+   |         ^^^^^^^ expected `int32`, found array expression
+...
+20 |     optional int32 x1 = 1;
+21 |     optional int32 x2 = 2;
+   |     -------------- expected due to this
+   |
+   = note: expected: scalar type `int32`
+              found: array expression
+
+error: message field `buf.test.Foo.x3` set multiple times
+  --> testdata/options/values/singular.proto:15:5
+   |
+14 |     x3: -1,
+   |     -- first set here...
+15 |     x3: [0, "foo"], // Setting more than once with an array is an error,
+   |     ^^ ... also set here
+...
+21 |     optional int32 x2 = 2;
+22 |     optional int32 x3 = 3;
+   |                    -- not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: mismatched types
+  --> testdata/options/values/singular.proto:15:9
+   |
+15 |     x3: [0, "foo"], // Setting more than once with an array is an error,
+   |         ^^^^^^^^^^ expected `int32`, found array expression
+...
+21 |     optional int32 x2 = 2;
+22 |     optional int32 x3 = 3;
+   |     -------------- expected due to this
+   |
+   = note: expected: scalar type `int32`
+              found: array expression
+
+error: mismatched types
+  --> testdata/options/values/singular.proto:15:13
+   |
+15 |     x3: [0, "foo"], // Setting more than once with an array is an error,
+   |             ^^^^^ expected `int32`, found `string`
+...
+21 |     optional int32 x2 = 2;
+22 |     optional int32 x3 = 3;
+   |     -------------- expected due to this
+   |
+   = note: expected: scalar type `int32`
+              found: scalar type `string`
+
+encountered 5 errors

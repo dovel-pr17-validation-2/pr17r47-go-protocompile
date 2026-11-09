@@ -1,0 +1,33 @@
+errors_only: true
+filters: ["unused import"]
+files:
+- path: "lite1.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+
+    option optimize_for = LITE_RUNTIME;
+
+    import "heavy1.proto";
+
+- path: "lite2.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+
+    option optimize_for = LITE_RUNTIME;
+
+    import "lite1.proto";
+
+- path: "heavy1.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+
+- path: "heavy2.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+
+    import "heavy1.proto";
+    import "lite1.proto";

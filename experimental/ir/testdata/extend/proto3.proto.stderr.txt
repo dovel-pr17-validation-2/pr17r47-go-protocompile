@@ -1,0 +1,26 @@
+error: extension range in "proto3"
+  --> testdata/extend/proto3.proto:9:16
+   |
+ 9 |     extensions 1;
+   |                ^
+  ::: testdata/extend/proto3.proto:2:10
+   |
+ 2 | syntax = "proto3";
+   |          -------- "proto3" specified here
+   |
+   = help: extension numbers cannot be reserved in "proto3"
+
+error: expected built-in options message, found message type `test.M`
+  --> testdata/extend/proto3.proto:12:1
+   |
+12 | extend M {
+   | ^^^^^^
+  ::: testdata/extend/proto3.proto:2:10
+   |
+ 2 | syntax = "proto3";
+   |          -------- "proto3" specified here
+   |
+   = help: extendees in "proto3" files are restricted to extending
+           `google.protobuf.*Options` message types
+
+encountered 2 errors

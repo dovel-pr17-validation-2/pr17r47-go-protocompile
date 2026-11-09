@@ -1,0 +1,235 @@
+error: unexpected `}` after definition
+  --> testdata/extend/decl.proto:6:20
+   |
+ 6 |     enum E { Z = 0 }
+   |                    ^ expected `;`
+   |
+  help: consider inserting a `;`
+   |
+ 6 |     enum E { Z = 0; }
+   |                   +
+
+warning: missing declaration for extension number `7`
+  --> testdata/extend/decl.proto:8:24
+   |
+ 8 |     extensions 1 to 3, 4 to 7 [
+   |                        ^^^^^^ required by this range
+   |
+   = note: this is likely a mistake, but it is not rejected by protoc
+
+error: multi-range `extensions` with extension declarations
+  --> testdata/extend/decl.proto:9:9
+   |
+ 8 |     extensions 1 to 3, 4 to 7 [
+   |                -------------- multiple ranges declared here
+ 9 |         declaration = {},
+   |         ^^^^^^^^^^^ declaration defined here
+   |
+   = help: this is rejected by protoc due to a quirk in its internal
+           representation of extension ranges
+
+error: extension declaration must specify `number`
+  --> testdata/extend/decl.proto:9:23
+   |
+ 9 |         declaration = {},
+   |                       ^^
+
+error: expected fully-qualified name in `Declaration.full_name`
+  --> testdata/extend/decl.proto:13:24
+   |
+13 |             full_name: "???",
+   |                        ^^^^^
+
+error: relative name in `Declaration.full_name`
+  --> testdata/extend/decl.proto:18:24
+   |
+18 |             full_name: "test.x",
+   |                        ^^^^^^^^
+  help: add a leading `.`
+   |
+18 |             full_name: ".test.x",
+   |                         +
+
+error: expected fully-qualified name in `Declaration.full_name`
+  --> testdata/extend/decl.proto:23:24
+   |
+23 |             full_name: ".test..x",
+   |                        ^^^^^^^^^^
+
+error: expected predeclared type or fully-qualified name in `Declaration.type`
+  --> testdata/extend/decl.proto:30:19
+   |
+30 |             type: "???",
+   |                   ^^^^^
+
+error: relative name in `Declaration.type`
+  --> testdata/extend/decl.proto:35:19
+   |
+35 |             type: "test.X",
+   |                   ^^^^^^^^
+  help: add a leading `.`
+   |
+35 |             type: ".test.X",
+   |                    +
+
+error: expected predeclared type or fully-qualified name in `Declaration.type`
+  --> testdata/extend/decl.proto:40:19
+   |
+40 |             type: ".test..X",
+   |                   ^^^^^^^^^^
+
+error: relative name in `Declaration.full_name`
+   --> testdata/extend/decl.proto:104:20
+    |
+104 |         full_name: "test.ok4",
+    |                    ^^^^^^^^^^
+   help: add a leading `.`
+    |
+104 |         full_name: ".test.ok4",
+    |                     +
+
+error: relative name in `Declaration.type`
+   --> testdata/extend/decl.proto:105:15
+    |
+105 |         type: "test.M", // Check that non-absolute paths work fine.
+    |               ^^^^^^^^
+   help: add a leading `.`
+    |
+105 |         type: ".test.M", // Check that non-absolute paths work fine.
+    |                +
+
+warning: expected type, got message extension `test.extn1`
+   --> testdata/extend/decl.proto:124:15
+    |
+124 |         type: ".test.extn1",
+    |               ^^^^^^^^^^^^^
+   ::: testdata/extend/decl.proto:129:20
+    |
+129 |     repeated int32 extn1 = 10;
+    |                    ----- `test.extn1` declared here
+    |
+    = help: `Declaration.type` must name a (possibly unimported) type
+
+error: mismatched types
+   --> testdata/extend/decl.proto:129:5
+    |
+ 47 |         type: "int32",
+    |               ------- expected due to this
+ ...
+129 |     repeated int32 extn1 = 10;
+    |     ^^^^^^^^^^^^^^ expected `int32`, found `repeated int32`
+    |
+    = note: expected: scalar type `int32`
+               found: scalar type `repeated int32`
+
+error: unexpected message extension name
+   --> testdata/extend/decl.proto:130:20
+    |
+130 |     optional int32 extn2 = 11;
+    |                    ^^^^^ expected `.test.wrong`
+    |
+   ::: testdata/extend/decl.proto:52:20
+    |
+ 52 |         full_name: ".test.wrong",
+    |                    ------------- expected name declared here
+
+error: mismatched types
+   --> testdata/extend/decl.proto:131:5
+    |
+ 59 |         type: "int32",
+    |               ------- expected due to this
+ 60 |         repeated: true
+    |         -------------- `repeated` required here
+ ...
+130 |     optional int32 extn2 = 11;
+131 |     optional int32 extn3 = 12;
+    |     ^^^^^^^^^^^^^^ expected `repeated int32`, found `int32`
+    |
+    = note: expected: scalar type `repeated int32`
+               found: scalar type `int32`
+
+error: mismatched types
+   --> testdata/extend/decl.proto:132:5
+    |
+ 66 |         type: ".test.M",
+    |               --------- expected due to this
+ ...
+131 |     optional int32 extn3 = 12;
+132 |     repeated M extn4 = 13;
+    |     ^^^^^^^^^^ expected `test.M`, found `repeated test.M`
+    |
+    = note: expected: message type `test.M`
+               found: message type `repeated test.M`
+
+error: mismatched types
+   --> testdata/extend/decl.proto:133:5
+    |
+ 72 |         type: ".test.M",
+    |               --------- expected due to this
+ 73 |         repeated: true
+    |         -------------- `repeated` required here
+ ...
+132 |     repeated M extn4 = 13;
+133 |     optional M extn5 = 14;
+    |     ^^^^^^^^^^ expected `repeated test.M`, found `test.M`
+    |
+    = note: expected: message type `repeated test.M`
+               found: message type `test.M`
+
+error: use of reserved extension number
+   --> testdata/extend/decl.proto:134:24
+    |
+134 |     optional M extn6 = 15;
+    |                        ^^
+   ::: testdata/extend/decl.proto:76:34
+    |
+ 76 |       extensions 15 [declaration = {
+    |  _________________________________-
+ ...  /
+ 79 | |         type: ".test.M",
+ 80 | |         reserved: true
+    | |                   ---- ... and reserved here
+ 81 | |     }];
+    | \_____- extension declared here
+
+error: mismatched types
+   --> testdata/extend/decl.proto:145:5
+    |
+112 |         type: ".test.M.E",
+    |               ----------- expected due to this
+ ...
+145 |     optional int32 enum1 = 30;
+    |     ^^^^^^^^^^^^^^ expected `test.M.E`, found `int32`
+    |
+    = note: expected: enum type `test.M.E`
+               found: scalar type `int32`
+
+error: mismatched types
+   --> testdata/extend/decl.proto:146:5
+    |
+118 |         type: ".test.Idk",
+    |               ----------- expected due to this
+ ...
+145 |     optional int32 enum1 = 30;
+146 |     optional int32 enum2 = 31;
+    |     ^^^^^^^^^^^^^^ expected unknown type `test.Idk`, found `int32`
+    |
+    = note: expected: unknown type `test.Idk`
+               found: scalar type `int32`
+
+error: mismatched types
+   --> testdata/extend/decl.proto:147:5
+    |
+124 |         type: ".test.extn1",
+    |               ------------- expected due to this
+ ...
+146 |     optional int32 enum2 = 31;
+147 |     optional int32 enum3 = 32;
+    |     ^^^^^^^^^^^^^^ expected `test.extn1`, found `int32`
+    |
+    = note: expected: message extension `test.extn1`
+               found: scalar type `int32`
+    = note: `test.extn1` is not a type; this indicates a bug in the extension
+            declaration
+
+encountered 20 errors and 2 warnings

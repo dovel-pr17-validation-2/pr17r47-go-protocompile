@@ -1,0 +1,33 @@
+error: enum type must define at least one value
+  --> testdata/tags/enum.proto:5:1
+   |
+ 5 | enum Empty {}
+   | ^^^^^^^^^^^^^
+
+error: first value of open enum must be zero
+  --> testdata/tags/enum.proto:17:10
+   |
+17 |     Z3 = 1;
+   |          ^
+  ::: testdata/tags/enum.proto:1:11
+   |
+ 1 | edition = "2023";
+   |           ------ this makes `buf.test.Open1` an open enum
+   |
+   = help: open enums must define a zero value, and it must be the first one
+
+error: first value of open enum must be zero
+  --> testdata/tags/enum.proto:22:10
+   |
+22 |     Z4 = 1;
+   |          ^
+  ::: testdata/tags/enum.proto:21:33
+   |
+21 |     option features.enum_type = OPEN;
+   |                                 ----
+   |                                  |
+   |                                  this makes `buf.test.Open2` an open enum
+   |
+   = help: open enums must define a zero value, and it must be the first one
+
+encountered 3 errors

@@ -1,0 +1,6 @@
+exclude: ["missing `package`", "missing `syntax`"]
+descriptor: true
+source_code_info: true
+files:
+- path: "empty.proto"
+  text: ""

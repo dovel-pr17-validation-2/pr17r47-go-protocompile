@@ -1,0 +1,31 @@
+exclude: "unused import"
+files:
+- path: "a.proto"
+  text: |
+    syntax = "proto2";
+    package buf.test;
+
+    import "b.proto";
+
+- path: "b.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package buf.test;
+
+    import "c.proto";
+
+- path: "c.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package buf.test;
+
+    import "a.proto";
+
+- path: "d.proto"
+  text: |
+    syntax = "proto2";
+    package buf.test;
+
+    import "d.proto";

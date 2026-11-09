@@ -1,0 +1,43 @@
+error: oneof `buf.test.Foo.o` set multiple times
+  --> testdata/options/values/oneof.proto:8:21
+   |
+ 8 | option (x) = {a: 1, b: {}};
+   |               -     ^ ... also set here
+   |               |
+   |               first set here...
+ 9 | option (y).b.a = 1;
+...
+14 |     oneof o {
+   |           - not a repeated field
+   |
+   = note: at most one member of a oneof may be set by an option
+
+error: oneof `buf.test.Foo.o` set multiple times
+  --> testdata/options/values/oneof.proto:10:8
+   |
+ 9 | option (y).b.a = 1;
+   |        ------- first set here...
+10 | option (y).b.b = {};
+   |        ^^^^^^^ ... also set here
+11 | option (y).a = 2;
+...
+14 |     oneof o {
+   |           - not a repeated field
+   |
+   = note: at most one member of a oneof may be set by an option
+
+error: oneof `buf.test.Foo.o` set multiple times
+  --> testdata/options/values/oneof.proto:11:8
+   |
+ 9 | option (y).b.a = 1;
+   |        ----- first set here...
+10 | option (y).b.b = {};
+11 | option (y).a = 2;
+   |        ^^^^^ ... also set here
+...
+14 |     oneof o {
+   |           - not a repeated field
+   |
+   = note: at most one member of a oneof may be set by an option
+
+encountered 3 errors

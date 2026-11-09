@@ -1,0 +1,7 @@
+error: oneof must define at least one member
+  --> testdata/fields/empty_oneof.proto:6:5
+   |
+ 6 |     oneof empty {}
+   |     ^^^^^^^^^^^^^^
+
+encountered 1 error

@@ -1,0 +1,31 @@
+symtab: true
+exclude: "unused import"
+files:
+- path: "main.proto"
+  text: |
+    syntax = "proto2";
+    package main;
+
+    import "b.proto";
+    import "c.proto";
+
+- path: "c.proto"
+  text: |
+    syntax = "proto2";
+    package dep;
+    
+    import public "a.proto";
+
+- path: "b.proto"
+  text: |
+    syntax = "proto2";
+    package dep;
+
+    import public "a.proto";
+
+- path: "a.proto"
+  text: |
+    syntax = "proto2";
+    package dep;
+
+    message X {}

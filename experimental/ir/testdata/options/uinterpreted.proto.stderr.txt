@@ -1,0 +1,64 @@
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:5:8
+   |
+ 5 | option uninterpreted_option = {};
+   |        ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:8:12
+   |
+ 8 |     option uninterpreted_option = {};
+   |            ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:10:27
+   |
+10 |     optional int32 x = 1 [uninterpreted_option = {}];
+   |                           ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:11:19
+   |
+11 |     extensions 2 [uninterpreted_option = {}];
+   |                   ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:13:16
+   |
+13 |         option uninterpreted_option = {};
+   |                ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:19:12
+   |
+19 |     option uninterpreted_option = {};
+   |            ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:21:12
+   |
+21 |     Z = 0 [uninterpreted_option = {}];
+   |            ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:25:12
+   |
+25 |     option uninterpreted_option = {};
+   |            ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+error: `uninterpreted_option` cannot be set explicitly
+  --> testdata/options/uinterpreted.proto:27:16
+   |
+27 |         option uninterpreted_option = {};
+   |                ^^^^^^^^^^^^^^^^^^^^
+   = help: `uninterpreted_option` is an implementation detail of protoc
+
+encountered 9 errors

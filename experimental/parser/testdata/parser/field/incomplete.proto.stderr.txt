@@ -1,0 +1,82 @@
+error: missing name in message field
+  --> testdata/parser/field/incomplete.proto:6:5
+   |
+ 6 |     name = 1;
+   |     ^^^^^^^^^
+
+error: missing name in message field
+  --> testdata/parser/field/incomplete.proto:7:5
+   |
+ 7 |     foo.Bar = 1;
+   |     ^^^^^^^^^^^^
+
+error: unexpected identifier after definition
+  --> testdata/parser/field/incomplete.proto:10:5
+   |
+10 |     foo.Bar name;
+   |     ^^^ expected `;`
+   |
+  help: consider inserting a `;`
+   |
+ 9 |     foo.bar name = 1;
+   |                     +
+
+error: missing message field tag in declaration
+  --> testdata/parser/field/incomplete.proto:10:5
+   |
+10 |     foo.Bar name;
+   |     ^^^^^^^^^^^^^
+
+error: unexpected integer literal in definition
+  --> testdata/parser/field/incomplete.proto:11:18
+   |
+11 |     foo.Bar name 1;
+   |                  ^ expected `=`
+   |
+  help: consider inserting a `=`
+   |
+11 |     foo.Bar name = 1;
+   |                  ++
+
+error: unexpected identifier after definition
+  --> testdata/parser/field/incomplete.proto:14:5
+   |
+14 |     foo..bar name = 1;
+   |     ^^^ expected `;`
+   |
+  help: consider inserting a `;`
+   |
+12 |     foo.bar name = 1;  // Comment
+   |                     +
+
+error: unexpected tokens after `.`
+  --> testdata/parser/field/incomplete.proto:14:9
+   |
+14 |     foo..bar name = 1;
+   |         ^ expected identifier or `(...)`
+
+error: unexpected tokens after `.`
+  --> testdata/parser/field/incomplete.proto:15:9
+   |
+15 |     foo...bar name = 1;
+   |         ^^ expected identifier or `(...)`
+
+error: unexpected qualified name in message field
+  --> testdata/parser/field/incomplete.proto:16:13
+   |
+16 |     foo.bar name. = 1;
+   |             ^^^^^ expected identifier
+
+error: unexpected `=` after qualified name
+  --> testdata/parser/field/incomplete.proto:16:19
+   |
+16 |     foo.bar name. = 1;
+   |                   ^ expected identifier or `(...)`
+   |
+  help: delete the extra `.`
+   |
+16 | -     foo.bar name. = 1;
+16 | +     foo.bar name = 1;
+   |
+
+encountered 10 errors

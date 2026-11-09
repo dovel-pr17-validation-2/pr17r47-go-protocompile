@@ -1,0 +1,394 @@
+error: nested message type marked as exported
+  --> testdata/strict_visibility.proto:7:5
+   |
+ 6 | / export message Complete {
+ 7 | |     export message M {}
+   | |     ^^^^^^ nested type exported here
+ 8 | |     export enum E { Z = 0; }
+ 9 | |     reserved 1 to max;
+10 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nested message types cannot be marked as exported,
+           even if all the field numbers of its parent are reserved
+
+error: nested enum type marked as exported
+  --> testdata/strict_visibility.proto:8:5
+   |
+ 6 | / export message Complete {
+ 7 | |     export message M {}
+ 8 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+ 9 | |     reserved 1 to max;
+10 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, a nested enum type can only be marked as exported if
+           it is nested within a top-level `local` message that declares
+           `reserved 1 to max;`
+
+error: nested message type marked as exported
+  --> testdata/strict_visibility.proto:13:5
+   |
+12 | / export message Complete2 {
+13 | |     export message M {}
+   | |     ^^^^^^ nested type exported here
+14 | |     export enum E { Z = 0; }
+15 | |     reserved 1 to 536870911;
+16 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nested message types cannot be marked as exported,
+           even if all the field numbers of its parent are reserved
+
+error: nested enum type marked as exported
+  --> testdata/strict_visibility.proto:14:5
+   |
+12 | / export message Complete2 {
+13 | |     export message M {}
+14 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+15 | |     reserved 1 to 536870911;
+16 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, a nested enum type can only be marked as exported if
+           it is nested within a top-level `local` message that declares
+           `reserved 1 to max;`
+
+error: nested message type marked as exported
+  --> testdata/strict_visibility.proto:19:5
+   |
+18 | / export message Split {
+19 | |     export message M {}
+   | |     ^^^^^^ nested type exported here
+20 | |     export enum E { Z = 0; }
+21 | |     reserved 1 to 5, 6 to max;
+22 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nested message types cannot be marked as exported,
+           even if all the field numbers of its parent are reserved
+
+error: nested enum type marked as exported
+  --> testdata/strict_visibility.proto:20:5
+   |
+18 | / export message Split {
+19 | |     export message M {}
+20 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+21 | |     reserved 1 to 5, 6 to max;
+22 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, a nested enum type can only be marked as exported if
+           it is nested within a top-level `local` message that declares
+           `reserved 1 to max;`
+
+error: nested message type marked as exported
+  --> testdata/strict_visibility.proto:25:5
+   |
+24 | / export message Incomplete1 {
+25 | |     export message M {}
+   | |     ^^^^^^ nested type exported here
+26 | |     export enum E { Z = 0; }
+27 | |     reserved 1 to 5;
+28 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nested message types cannot be marked as exported,
+           even if all the field numbers of its parent are reserved
+
+error: nested enum type marked as exported
+  --> testdata/strict_visibility.proto:26:5
+   |
+24 | / export message Incomplete1 {
+25 | |     export message M {}
+26 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+27 | |     reserved 1 to 5;
+28 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, a nested enum type can only be marked as exported if
+           it is nested within a top-level `local` message that declares
+           `reserved 1 to max;`
+
+error: nested message type marked as exported
+  --> testdata/strict_visibility.proto:31:5
+   |
+30 | / export message Incomplete2 {
+31 | |     export message M {}
+   | |     ^^^^^^ nested type exported here
+32 | |     export enum E { Z = 0; }
+33 | |     reserved 6 to max;
+34 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nested message types cannot be marked as exported,
+           even if all the field numbers of its parent are reserved
+
+error: nested enum type marked as exported
+  --> testdata/strict_visibility.proto:32:5
+   |
+30 | / export message Incomplete2 {
+31 | |     export message M {}
+32 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+33 | |     reserved 6 to max;
+34 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, a nested enum type can only be marked as exported if
+           it is nested within a top-level `local` message that declares
+           `reserved 1 to max;`
+
+error: nested message type marked as exported
+  --> testdata/strict_visibility.proto:37:5
+   |
+36 | / export message Incomplete3 {
+37 | |     export message M {}
+   | |     ^^^^^^ nested type exported here
+38 | |     export enum E { Z = 0; }
+39 | |     reserved 1 to 5, 6 to 10;
+40 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nested message types cannot be marked as exported,
+           even if all the field numbers of its parent are reserved
+
+error: nested enum type marked as exported
+  --> testdata/strict_visibility.proto:38:5
+   |
+36 | / export message Incomplete3 {
+37 | |     export message M {}
+38 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+39 | |     reserved 1 to 5, 6 to 10;
+40 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, a nested enum type can only be marked as exported if
+           it is nested within a top-level `local` message that declares
+           `reserved 1 to max;`
+
+warning: redundant visibility modifier
+  --> testdata/strict_visibility.proto:42:1
+   |
+42 | local message LocalComplete {
+   | ^^^^^ specified here
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ this implies it
+
+warning: redundant visibility modifier
+  --> testdata/strict_visibility.proto:47:1
+   |
+47 | local message LocalComplete2 {
+   | ^^^^^ specified here
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ this implies it
+
+warning: redundant visibility modifier
+  --> testdata/strict_visibility.proto:52:1
+   |
+52 | local message LocalSplit {
+   | ^^^^^ specified here
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ this implies it
+
+error: expected exactly one reserved range
+  --> testdata/strict_visibility.proto:53:5
+   |
+52 | / local message LocalSplit {
+53 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+54 | |     reserved 1 to 5, 6 to max;
+   | |              ------  -------- another here
+   | |               |
+   | |               one here
+55 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nesting an exported type within another type requires
+           that that type declare `reserved 1 to max;`, even if all of its field
+           numbers are `reserved`
+   = help: replace these ranges with a single `reserved 1 to max;`
+
+warning: redundant visibility modifier
+  --> testdata/strict_visibility.proto:57:1
+   |
+57 | local message LocalIncomplete1 {
+   | ^^^^^ specified here
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ this implies it
+
+error: message type `buf.test.LocalIncomplete1` does not reserve all field
+       numbers
+  --> testdata/strict_visibility.proto:58:5
+   |
+57 | / local message LocalIncomplete1 {
+58 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+59 | |     reserved 1 to 5;
+60 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nesting an exported type within another type requires
+           that that type reserve every field number (the "C++ namespace
+           exception"), but this type does not reserve the field number 6
+
+warning: redundant visibility modifier
+  --> testdata/strict_visibility.proto:62:1
+   |
+62 | local message LocalIncomplete2 {
+   | ^^^^^ specified here
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ this implies it
+
+error: message type `buf.test.LocalIncomplete2` does not reserve all field
+       numbers
+  --> testdata/strict_visibility.proto:63:5
+   |
+62 | / local message LocalIncomplete2 {
+63 | |     export enum E { Z = 0; }
+   | |     ^^^^^^ nested type exported here
+64 | |     reserved 6 to max;
+65 | | }
+   | \_- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, nesting an exported type within another type requires
+           that that type reserve every field number (the "C++ namespace
+           exception"), but this type does not reserve the field number 1
+
+warning: redundant visibility modifier
+  --> testdata/strict_visibility.proto:67:1
+   |
+67 | local message LocalNested {
+   | ^^^^^ specified here
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ this implies it
+
+warning: redundant visibility modifier
+  --> testdata/strict_visibility.proto:68:5
+   |
+68 |     local message Inner {
+   |     ^^^^^ specified here
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ this implies it
+
+error: nested enum type marked as exported
+  --> testdata/strict_visibility.proto:69:9
+   |
+68 | /     local message Inner {
+69 | |         export enum E { Z = 0; }
+   | |         ^^^^^^ nested type exported here
+70 | |         reserved 1 to max;
+71 | |     }
+   | \_____- ... within this type
+   |
+  ::: testdata/strict_visibility.proto:4:45
+   |
+ 4 | option features.default_symbol_visibility = STRICT;
+   |                                             ------ `STRICT` specified here
+   |
+   = help: in strict mode, a nested enum type can only be marked as exported if
+           it is nested within a top-level `local` message that declares
+           `reserved 1 to max;`
+
+encountered 16 errors and 7 warnings

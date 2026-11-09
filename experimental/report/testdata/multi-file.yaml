@@ -1,0 +1,71 @@
+# buf.compiler.v1.Report
+
+files:
+  - path: "foo.proto"
+    text: |
+      syntax = "proto4"
+
+      package abc.xyz;
+
+      message Blah {
+        required size_t x = 0;
+      }
+  - path: "bar.proto"
+    text: |
+      syntax = "proto4"
+
+      package abc.xyz2;
+
+      message Foo {
+        required int32 y = 0;
+      }
+
+diagnostics:
+  - message: two files
+    level: LEVEL_ERROR
+    annotations:
+      - message: foo
+        file: 0
+        start: 27
+        end: 34
+      - message: bar
+        file: 0
+        start: 45
+        end: 49
+      - message: baz
+        file: 1
+        start: 27
+        end: 34
+
+  - message: two files with page break
+    level: LEVEL_ERROR
+    annotations:
+      - message: foo
+        file: 0
+        start: 27
+        end: 34
+        page_break: true
+      - message: bar
+        file: 0
+        start: 45
+        end: 49
+      - message: baz
+        file: 1
+        start: 27
+        end: 34
+
+  - message: three files
+    level: LEVEL_ERROR
+    annotations:
+      - message: foo
+        file: 0
+        start: 27
+        end: 34
+      - message: baz
+        file: 1
+        start: 27
+        end: 34
+      - message: bar
+        file: 0
+        start: 45
+        end: 49

@@ -1,0 +1,12 @@
+error: unexpected `package` after `syntax` declaration
+  --> testdata/parser/syntax/nosemi.proto:3:1
+   |
+ 3 | package test;
+   | ^^^^^^^ expected `;`
+   |
+  help: consider inserting a `;`
+   |
+ 1 | syntax = "proto2";
+   |                  +
+
+encountered 1 error

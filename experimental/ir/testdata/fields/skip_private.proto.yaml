@@ -1,0 +1,31 @@
+descriptor: true
+exclude: "unused import"
+files:
+- path: "a.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package foo.bar;
+
+    message M {}
+
+- path: "b.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package foo;
+
+    import "a.proto";
+
+    message M {}
+
+- path: "c.proto"
+  text: |
+    syntax = "proto3";
+    package foo.bar.baz;
+    
+    import "b.proto";
+
+    message N {
+      M m = 1;  // .foo.M
+    }

@@ -1,0 +1,65 @@
+files:
+- path: "a.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+
+    message M {
+      extensions 1 to max;
+    }
+
+- path: "b.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+
+    import "a.proto";
+
+    extend M {
+      optional int32 a = 1;
+    }
+
+- path: "c.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+
+    import "a.proto";
+
+    extend M {
+      optional int32 b = 1;
+    }
+
+    extend test.M {
+      optional int32 c = 2;
+    }
+
+    extend .test.M {
+      optional int32 d = 3;
+    }
+
+# d.proto is not part of the workspace but its extension should still participate
+# in the duplicate check because it is a direct import of e.proto.
+- path: "d.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package test;
+
+    import public "a.proto";
+
+    extend M {
+      optional int32 e = 4;
+    }
+
+- path: "e.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+
+    import "d.proto";
+
+    extend M {
+      optional int32 f = 4;
+    }
+

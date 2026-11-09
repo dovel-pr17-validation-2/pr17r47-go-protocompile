@@ -1,0 +1,12 @@
+error: unexpected end-of-file after `package` declaration
+  --> testdata/parser/package/nosemi.proto:3:13
+   |
+ 3 | package test
+   |             ^ expected `;`
+   |
+  help: consider inserting a `;`
+   |
+ 3 | package test;
+   |             +
+
+encountered 1 error

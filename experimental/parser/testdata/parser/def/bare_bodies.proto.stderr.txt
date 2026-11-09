@@ -1,0 +1,31 @@
+error: unexpected definition body in message definition
+  --> testdata/parser/def/bare_bodies.proto:7:5
+   |
+ 7 | /     {
+ 8 | |         int32 y = 2;
+ 9 | |     }
+   | \_____^
+  help: remove these braces
+   |
+ 7 | -     {
+ 8 |           int32 y = 2;
+ 9 | -     }
+   |
+
+error: unexpected definition body in file scope
+  --> testdata/parser/def/bare_bodies.proto:12:1
+   |
+12 | / {
+...  |
+16 | | }
+   | \_^
+  help: remove these braces
+   |
+12 | - {
+13 |       message N {
+14 |           int32 y = 2;
+15 |       }
+16 | - }
+   |
+
+encountered 2 errors

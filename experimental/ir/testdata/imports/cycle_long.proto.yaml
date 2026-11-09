@@ -1,0 +1,57 @@
+exclude: "unused import"
+files:
+- path: "a1.proto"
+  text: |
+    syntax = "proto3";
+    package a;
+
+    import "b1.proto";
+    import "b2.proto";
+
+- path: "b1.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package b1;
+
+    import "c1.proto";
+
+- path: "b2.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package b2;
+
+    import "c2.proto";
+
+- path: "c1.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package c1;
+
+    import "d1.proto";
+
+- path: "c2.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package c2;
+
+    import "d2.proto";
+
+- path: "d1.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package d1;
+
+    import "b2.proto";
+
+- path: "d2.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package d2;
+
+    import "b1.proto";

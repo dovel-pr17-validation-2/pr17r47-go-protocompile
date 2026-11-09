@@ -1,0 +1,85 @@
+error: unexpected `required`
+  --> testdata/parser/field/ok.proto:8:5
+   |
+ 8 |     required Type name = 1;
+   |     ^^^^^^^^ expected type name, `optional`, or `repeated`
+   |
+  help: delete it
+   |
+ 8 | -     required Type name = 1;
+ 8 | +     Type name = 1;
+   |
+   |
+   = help: required fields are only permitted in proto2; even then, their use is
+           strongly discouraged
+
+error: unexpected `required`
+  --> testdata/parser/field/ok.proto:13:5
+   |
+13 |     required .Type name = 1;
+   |     ^^^^^^^^ expected type name, `optional`, or `repeated`
+   |
+  help: delete it
+   |
+13 | -     required .Type name = 1;
+13 | +     .Type name = 1;
+   |
+   |
+   = help: required fields are only permitted in proto2; even then, their use is
+           strongly discouraged
+
+error: unexpected `required`
+  --> testdata/parser/field/ok.proto:18:5
+   |
+18 |     required package.Type name = 1;
+   |     ^^^^^^^^ expected type name, `optional`, or `repeated`
+   |
+  help: delete it
+   |
+18 | -     required package.Type name = 1;
+18 | +     package.Type name = 1;
+   |
+   |
+   = help: required fields are only permitted in proto2; even then, their use is
+           strongly discouraged
+
+error: unexpected `required`
+  --> testdata/parser/field/ok.proto:23:5
+   |
+23 |     required .package.Type name = 1;
+   |     ^^^^^^^^ expected type name, `optional`, or `repeated`
+   |
+  help: delete it
+   |
+23 | -     required .package.Type name = 1;
+23 | +     .package.Type name = 1;
+   |
+   |
+   = help: required fields are only permitted in proto2; even then, their use is
+           strongly discouraged
+
+error: unexpected `export` modifier on message field
+  --> testdata/parser/field/ok.proto:29:5
+   |
+29 |     export Type name = 1;
+   |     ^^^^^^
+  help: delete it
+   |
+29 | -     export Type name = 1;
+29 | +     Type name = 1;
+   |
+   = help: `export` only applies to a type definition
+
+error: unexpected `local` modifier on message field
+  --> testdata/parser/field/ok.proto:30:5
+   |
+30 |     local Type name = 1;
+   |     ^^^^^
+  help: delete it
+   |
+30 | -     local Type name = 1;
+30 | +     Type name = 1;
+   |
+   = help: `local` only applies to a type definition
+
+encountered 6 errors

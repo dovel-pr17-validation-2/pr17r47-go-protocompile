@@ -1,0 +1,48 @@
+error: `ctype` is not supported in Edition 2024
+  --> testdata/options/validate/ctype_2024.proto:6:21
+   |
+ 1 | edition = "2024";
+   |           ------ edition specified here
+...
+ 6 |     string foo = 1 [ctype = STRING];
+   |                     ^^^^^
+  help: replace with `features.(pb.cpp).string_type`
+   |
+ 6 | -     string foo = 1 [ctype = STRING];
+ 6 | +     string foo = 1 [features.(pb.cpp).string_type = STRING];
+   |
+   = help: deprecated since Edition 2023, removed in Edition 2024
+
+error: `ctype` is not supported in Edition 2024
+  --> testdata/options/validate/ctype_2024.proto:7:21
+   |
+ 1 | edition = "2024";
+   |           ------ edition specified here
+...
+ 6 |     string foo = 1 [ctype = STRING];
+ 7 |     string bar = 2 [ctype = CORD];
+   |                     ^^^^^
+  help: replace with `features.(pb.cpp).string_type`
+   |
+ 7 | -     string bar = 2 [ctype = CORD];
+ 7 | +     string bar = 2 [features.(pb.cpp).string_type = CORD];
+   |
+   = help: deprecated since Edition 2023, removed in Edition 2024
+
+error: `ctype` is not supported in Edition 2024
+  --> testdata/options/validate/ctype_2024.proto:8:21
+   |
+ 1 | edition = "2024";
+   |           ------ edition specified here
+...
+ 7 |     string bar = 2 [ctype = CORD];
+ 8 |     string baz = 3 [ctype = STRING_PIECE];
+   |                     ^^^^^
+  help: replace with `features.(pb.cpp).string_type`
+   |
+ 8 | -     string baz = 3 [ctype = STRING_PIECE];
+ 8 | +     string baz = 3 [features.(pb.cpp).string_type = VIEW];
+   |
+   = help: deprecated since Edition 2023, removed in Edition 2024
+
+encountered 3 errors

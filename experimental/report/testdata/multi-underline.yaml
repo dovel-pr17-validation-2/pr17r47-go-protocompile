@@ -1,0 +1,35 @@
+# buf.compiler.v1.Report
+
+files:
+  - path: "foo.proto"
+    text: |
+      syntax = "proto4"
+
+      package abc.xyz;
+
+      message Blah {
+        required size_t x = 0;
+      }
+
+diagnostics:
+  - message: "`size_t` is not a built-in Protobuf type"
+    level: LEVEL_ERROR
+    annotations:
+      - file: 0
+        start: 63
+        end: 68
+      - message: "syntax version specified here"
+        file: 0
+        start: 9
+        end: 17
+  - message: "these are pretty bad names"
+    level: LEVEL_WARNING
+    annotations:
+      - message: "could be better"
+        file: 0
+        start: 27
+        end: 34
+      - message: "blah to you too!!"
+        file: 0
+        start: 45
+        end: 49

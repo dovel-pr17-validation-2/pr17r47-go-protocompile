@@ -1,0 +1,146 @@
+# buf.compiler.v1.Report
+
+files:
+  - path: "foo.proto"
+    text: |
+      syntax = "proto4"
+
+      package abc.xyz;
+
+      message Blah {
+        required size_t x = 0;
+        message Bonk {
+          field
+          field
+          field
+        }
+      }
+
+diagnostics:
+  - message: whole block
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 37
+      end: 129
+
+  - message: nested blocks
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 37
+      end: 129
+    - message: "and this block"
+      file: 0
+      start: 79
+      end: 127
+
+  - message: parallel blocks
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 37
+      end: 79
+    - message: "and this block"
+      file: 0
+      start: 127
+      end: 129
+
+  - message: nested blocks same start
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 37
+      end: 129
+    - message: "and this block"
+      file: 0
+      start: 37
+      end: 127
+
+  - message: nested blocks same end
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 37
+      end: 129
+    - message: "and this block"
+      file: 0
+      start: 79
+      end: 129
+    
+  - message: nested overlap
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 37
+      end: 127
+    - message: "and this block"
+      file: 0
+      start: 79
+      end: 129
+
+  - message: nesting just the braces
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 51
+      end: 129
+    - message: "and this block"
+      file: 0
+      start: 93
+      end: 127
+
+  - message: nesting just the braces same start
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 51
+      end: 129
+    - message: "and this block"
+      file: 0
+      start: 51
+      end: 127
+
+  - message: nesting just the braces same start (2)
+    level: LEVEL_WARNING
+    annotations:
+    - message: "and this block"
+      file: 0
+      start: 51
+      end: 127
+    - message: "this block"
+      file: 0
+      start: 51
+      end: 129
+
+  - message: braces nesting overlap
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this block"
+      file: 0
+      start: 51
+      end: 127
+    - message: "and this block"
+      file: 0
+      start: 93
+      end: 129
+
+  - message: braces nesting overlap (2)
+    level: LEVEL_WARNING
+    annotations:
+    - message: "and this block"
+      file: 0
+      start: 93
+      end: 129
+    - message: "this block"
+      file: 0
+      start: 51
+      end: 127

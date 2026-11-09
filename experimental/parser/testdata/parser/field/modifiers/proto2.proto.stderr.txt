@@ -1,0 +1,95 @@
+warning: required fields are deprecated
+  --> testdata/parser/field/modifiers/proto2.proto:6:5
+   |
+ 6 |     required int32 a = 1;
+   |     ^^^^^^^^
+   = help: do not attempt to change this to `optional` if the field is already
+           in-use; doing so is a wire protocol break
+
+error: unexpected type name
+  --> testdata/parser/field/modifiers/proto2.proto:9:5
+   |
+ 9 |     int32 a = 1;
+   |     ^^^^^ expected `optional`, `repeated`, or `required`
+   |
+  help: use the `optional` modifier
+   |
+ 9 |     optional int32 a = 1;
+   |     +++++++++
+   |
+   = note: modifiers are required in proto2
+
+error: unexpected `required`
+  --> testdata/parser/field/modifiers/proto2.proto:13:9
+   |
+12 | /     oneof bar {
+13 | |         required int32 a = 1;
+   | |         ^^^^^^^^ expected type name
+14 | |         optional int32 a = 1;
+...  |
+18 | |     }
+   | \_____- within this oneof definition
+   |
+  help: delete it
+   |
+13 | -         required int32 a = 1;
+13 | +         int32 a = 1;
+   |
+   |
+   = note: fields defined as part of a oneof definition may not have modifiers
+           applied to them
+
+error: unexpected `optional`
+  --> testdata/parser/field/modifiers/proto2.proto:14:9
+   |
+12 | /     oneof bar {
+13 | |         required int32 a = 1;
+14 | |         optional int32 a = 1;
+   | |         ^^^^^^^^ expected type name
+15 | |         repeated int32 a = 1;
+...  |
+18 | |     }
+   | \_____- within this oneof definition
+   |
+  help: delete it
+   |
+14 | -         optional int32 a = 1;
+14 | +         int32 a = 1;
+   |
+   |
+   = note: fields defined as part of a oneof definition may not have modifiers
+           applied to them
+
+error: unexpected `repeated`
+  --> testdata/parser/field/modifiers/proto2.proto:15:9
+   |
+12 | /     oneof bar {
+13 | |         required int32 a = 1;
+14 | |         optional int32 a = 1;
+15 | |         repeated int32 a = 1;
+   | |         ^^^^^^^^ expected type name
+16 | |         int32 a = 1;
+17 | |         map<int32, int32> a = 1;
+18 | |     }
+   | \_____- within this oneof definition
+   |
+  help: delete it
+   |
+15 | -         repeated int32 a = 1;
+15 | +         int32 a = 1;
+   |
+   |
+   = note: fields defined as part of a oneof definition may not have modifiers
+           applied to them
+   = help: to emulate a repeated field in a oneof definition, define a local
+           message type with a single repeated field
+
+error: map fields are not allowed inside of a oneof definition
+  --> testdata/parser/field/modifiers/proto2.proto:17:9
+   |
+17 |         map<int32, int32> a = 1;
+   |         ^^^^^^^^^^^^^^^^^
+   = help: to emulate a map field in a oneof definition, fine a local message
+           type with a single map field
+
+encountered 5 errors and 1 warning

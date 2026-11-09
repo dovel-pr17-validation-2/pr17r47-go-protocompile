@@ -1,0 +1,16 @@
+error: unexpected `required`
+  --> testdata/parser/type/ok.proto:8:5
+   |
+ 8 |     required M x3 = 3;
+   |     ^^^^^^^^ expected type name, `optional`, or `repeated`
+   |
+  help: delete it
+   |
+ 8 | -     required M x3 = 3;
+ 8 | +     M x3 = 3;
+   |
+   |
+   = help: required fields are only permitted in proto2; even then, their use is
+           strongly discouraged
+
+encountered 1 error

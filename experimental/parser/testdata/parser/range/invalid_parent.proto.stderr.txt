@@ -1,0 +1,65 @@
+error: unexpected extension range within service definition
+  --> testdata/parser/range/invalid_parent.proto:6:5
+   |
+ 5 | / service Foo {
+ 6 | |     extensions 1;
+   | |     ^^^^^^^^^^^^^ this extension range...
+ 7 | |     reserved 1;
+ 8 | | }
+   | \_- ...cannot be declared within this service definition
+   |
+   = help: this extension range can only appear within one of message definition
+           or group definition
+
+error: unexpected reserved range within service definition
+  --> testdata/parser/range/invalid_parent.proto:7:5
+   |
+ 5 | / service Foo {
+ 6 | |     extensions 1;
+ 7 | |     reserved 1;
+   | |     ^^^^^^^^^^^ this reserved range...
+ 8 | | }
+   | \_- ...cannot be declared within this service definition
+   |
+   = help: this reserved range can only appear within one of message definition,
+           enum definition, or group definition
+
+error: unexpected extension range within message extension block
+  --> testdata/parser/range/invalid_parent.proto:11:5
+   |
+10 | / extend Foo {
+11 | |     extensions 1;
+   | |     ^^^^^^^^^^^^^ this extension range...
+12 | |     reserved 1;
+13 | | }
+   | \_- ...cannot be declared within this message extension block
+   |
+   = help: this extension range can only appear within one of message definition
+           or group definition
+
+error: unexpected reserved range within message extension block
+  --> testdata/parser/range/invalid_parent.proto:12:5
+   |
+10 | / extend Foo {
+11 | |     extensions 1;
+12 | |     reserved 1;
+   | |     ^^^^^^^^^^^ this reserved range...
+13 | | }
+   | \_- ...cannot be declared within this message extension block
+   |
+   = help: this reserved range can only appear within one of message definition,
+           enum definition, or group definition
+
+error: unexpected extension range within enum definition
+  --> testdata/parser/range/invalid_parent.proto:16:5
+   |
+15 | / enum Foo {
+16 | |     extensions 1;
+   | |     ^^^^^^^^^^^^^ this extension range...
+17 | | }
+   | \_- ...cannot be declared within this enum definition
+   |
+   = help: this extension range can only appear within one of message definition
+           or group definition
+
+encountered 5 errors

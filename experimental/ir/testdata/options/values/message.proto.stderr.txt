@@ -1,0 +1,447 @@
+error: cannot name extension field using `(...)` in message expression
+  --> testdata/options/values/message.proto:11:5
+   |
+11 |     (buf.test.x) {}
+   |     ^^^^^^^^^^^^ expected this to be wrapped in `[...]` instead
+   |
+  help: replace the `(...)` with `[...]`
+   |
+11 | -     (buf.test.x) {}
+11 | +     [buf.test.x] {}
+
+error: unexpected absolute path in extension name
+  --> testdata/options/values/message.proto:13:6
+   |
+13 |     [.buf.test.x] {}
+   |      ^^^^^^^^^^^ expected a path without a leading `.`
+   |
+  help: remove the leading `.`
+   |
+13 | -     [.buf.test.x] {}
+13 | +     [buf.test.x] {}
+
+error: cannot name extension field using `(...)` in message expression
+  --> testdata/options/values/message.proto:27:5
+   |
+27 |     (Foo.z): 1,
+   |     ^^^^^^^ expected this to be wrapped in `[...]` instead
+   |
+  help: replace the `(...)` with `[...]`
+   |
+27 | -     (Foo.z): 1,
+27 | +     [Foo.z]: 1,
+
+error: unexpected absolute path in extension name
+  --> testdata/options/values/message.proto:32:6
+   |
+32 |     [.buf.test.Foo.z]: 3,
+   |      ^^^^^^^^^^^^^^^ expected a path without a leading `.`
+   |
+  help: remove the leading `.`
+   |
+32 | -     [.buf.test.Foo.z]: 3,
+32 | +     [buf.test.Foo.z]: 3,
+
+error: mismatched types
+  --> testdata/options/values/message.proto:9:5
+   |
+ 9 |     [x] {}
+   |     ^^^
+   |     |
+   |     expected `buf.test.Foo` field, found `google.protobuf.FileOptions` field
+10 |     [buf.test.x] {}
+...
+45 |     optional Foo x = 1000;
+   |     ------------ expected due to this
+   |
+   = note: expected: `buf.test.Foo` field
+              found: `google.protobuf.FileOptions` field
+
+error: mismatched types
+  --> testdata/options/values/message.proto:10:5
+   |
+10 |     [buf.test.x] {}
+   |     ^^^^^^^^^^^^
+   |      |
+   |      expected `buf.test.Foo` field, found `google.protobuf.FileOptions` field
+11 |     (buf.test.x) {}
+...
+45 |     optional Foo x = 1000;
+   |     ------------ expected due to this
+   |
+   = note: expected: `buf.test.Foo` field
+              found: `google.protobuf.FileOptions` field
+
+error: mismatched types
+  --> testdata/options/values/message.proto:12:5
+   |
+12 |     "buf.test.x" {}
+   |     ^^^^^^^^^^^^
+   |      |
+   |      expected `buf.test.Foo` field, found `google.protobuf.FileOptions` field
+13 |     [.buf.test.x] {}
+...
+45 |     optional Foo x = 1000;
+   |     ------------ expected due to this
+   |
+   = note: expected: `buf.test.Foo` field
+              found: `google.protobuf.FileOptions` field
+
+error: mismatched types
+  --> testdata/options/values/message.proto:13:5
+   |
+13 |     [.buf.test.x] {}
+   |     ^^^^^^^^^^^^^
+   |      |
+   |      expected `buf.test.Foo` field, found `google.protobuf.FileOptions` field
+...
+45 |     optional Foo x = 1000;
+   |     ------------ expected due to this
+   |
+   = note: expected: `buf.test.Foo` field
+              found: `google.protobuf.FileOptions` field
+
+error: message field `buf.test.Foo.y` referenced incorrectly
+  --> testdata/options/values/message.proto:15:5
+   |
+15 |     [y]: 0,
+   |     ^^^ referenced here
+   |
+  help: reference it as `y`
+   |
+15 | -     [y]: 0,
+15 | +     y: 0,
+   |
+   |
+   = note: `[...]` must only be used when referencing extensions or concrete
+           `Any` types
+
+error: message field `buf.test.Foo.y` referenced incorrectly
+  --> testdata/options/values/message.proto:16:5
+   |
+16 |     "y": 0,
+   |     ^^^ referenced here
+   |
+  help: reference it as `y`
+   |
+16 | -     "y": 0,
+16 | +     y: 0,
+   |
+   |
+   = note: due to a parser quirk, `.protoc` rejects quoted strings here, even
+           though textproto does not
+
+error: message field `buf.test.Foo.y` set multiple times
+  --> testdata/options/values/message.proto:16:5
+   |
+15 |     [y]: 0,
+   |     --- first set here...
+16 |     "y": 0,
+   |     ^^^ ... also set here
+17 |     [Foo.y]: 0,
+...
+36 |     optional int32 y = 1;
+   |                    - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message field `buf.test.Foo.y` referenced incorrectly
+  --> testdata/options/values/message.proto:17:5
+   |
+17 |     [Foo.y]: 0,
+   |     ^^^^^^^ referenced here
+   |
+  help: reference it as `y`
+   |
+17 | -     [Foo.y]: 0,
+17 | +     y: 0,
+   |
+   |
+   = note: `[...]` must only be used when referencing extensions or concrete
+           `Any` types
+   = note: field names must be a single identifier
+
+error: message field `buf.test.Foo.y` set multiple times
+  --> testdata/options/values/message.proto:17:5
+   |
+15 |     [y]: 0,
+   |     --- first set here...
+16 |     "y": 0,
+17 |     [Foo.y]: 0,
+   |     ^^^^^^^ ... also set here
+18 |     Foo.y: 0,
+...
+36 |     optional int32 y = 1;
+   |                    - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message field `buf.test.Foo.y` referenced incorrectly
+  --> testdata/options/values/message.proto:18:5
+   |
+18 |     Foo.y: 0,
+   |     ^^^^^ referenced here
+   |
+  help: reference it as `y`
+   |
+18 | -     Foo.y: 0,
+18 | +     y: 0,
+   |
+   |
+   = note: field names must be a single identifier
+
+error: message field `buf.test.Foo.y` set multiple times
+  --> testdata/options/values/message.proto:18:5
+   |
+15 |     [y]: 0,
+   |     --- first set here...
+16 |     "y": 0,
+17 |     [Foo.y]: 0,
+18 |     Foo.y: 0,
+   |     ^^^^^ ... also set here
+19 |     ["Foo.y"]: 0,
+...
+36 |     optional int32 y = 1;
+   |                    - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message field `buf.test.Foo.y` referenced incorrectly
+  --> testdata/options/values/message.proto:19:5
+   |
+19 |     ["Foo.y"]: 0,
+   |     ^^^^^^^^^ referenced here
+   |
+  help: reference it as `y`
+   |
+19 | -     ["Foo.y"]: 0,
+19 | +     y: 0,
+   |
+   |
+   = note: `[...]` must only be used when referencing extensions or concrete
+           `Any` types
+   = note: field names must be a single identifier
+
+error: message field `buf.test.Foo.y` set multiple times
+  --> testdata/options/values/message.proto:19:5
+   |
+15 |     [y]: 0,
+   |     --- first set here...
+16 |     "y": 0,
+17 |     [Foo.y]: 0,
+18 |     Foo.y: 0,
+19 |     ["Foo.y"]: 0,
+   |     ^^^^^^^^^ ... also set here
+20 |     "Foo.y": 0,
+...
+36 |     optional int32 y = 1;
+   |                    - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message field `buf.test.Foo.y` referenced incorrectly
+  --> testdata/options/values/message.proto:20:5
+   |
+20 |     "Foo.y": 0,
+   |     ^^^^^^^ referenced here
+   |
+  help: reference it as `y`
+   |
+20 | -     "Foo.y": 0,
+20 | +     y: 0,
+   |
+   |
+   = note: field names must be a single identifier
+   = note: due to a parser quirk, `.protoc` rejects quoted strings here, even
+           though textproto does not
+
+error: message field `buf.test.Foo.y` set multiple times
+  --> testdata/options/values/message.proto:20:5
+   |
+15 |     [y]: 0,
+   |     --- first set here...
+16 |     "y": 0,
+...
+19 |     ["Foo.y"]: 0,
+20 |     "Foo.y": 0,
+   |     ^^^^^^^ ... also set here
+...
+36 |     optional int32 y = 1;
+   |                    - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message field `buf.test.Foo.y` referenced incorrectly
+  --> testdata/options/values/message.proto:22:5
+   |
+22 |     1: 0,
+   |     ^ referenced here
+   |
+  help: reference it as `y`
+   |
+22 | -     1: 0,
+22 | +     y: 0,
+   |
+   |
+   = note: field names must be a single identifier
+   = note: due to a parser quirk, `.protoc` rejects numbers here, even though
+           textproto does not
+
+error: message field `buf.test.Foo.y` set multiple times
+  --> testdata/options/values/message.proto:22:5
+   |
+15 |     [y]: 0,
+   |     --- first set here...
+16 |     "y": 0,
+...
+22 |     1: 0,
+   |     ^ ... also set here
+23 |     1000: 1,
+...
+36 |     optional int32 y = 1;
+   |                    - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: cannot resolve message field name for `buf.test.Foo`
+  --> testdata/options/values/message.proto:23:5
+   |
+23 |     1000: 1,
+   |     ^^^^^^^ field referenced here
+...
+45 |     optional Foo x = 1000;
+   |     ------------ expected `Foo` field due to this
+
+error: cannot resolve message field name for `buf.test.Foo`
+  --> testdata/options/values/message.proto:25:5
+   |
+25 |     [z]: 0,
+   |     ^^^^^^ field referenced here
+26 |     [Foo.z]: 1,
+...
+45 |     optional Foo x = 1000;
+   |     ------------ expected `Foo` field due to this
+
+error: message extension `buf.test.Foo.z` referenced incorrectly
+  --> testdata/options/values/message.proto:28:5
+   |
+28 |     ["Foo.z"]: 1,
+   |     ^^^^^^^^^ referenced here
+   |
+  help: reference it as `[buf.test.Foo.z]`
+   |
+28 | -     ["Foo.z"]: 1,
+28 | +     [buf.test.Foo.z]: 1,
+
+error: message extension `buf.test.Foo.z` set multiple times
+  --> testdata/options/values/message.proto:28:5
+   |
+26 |     [Foo.z]: 1,
+   |     ------- first set here...
+27 |     (Foo.z): 1,
+28 |     ["Foo.z"]: 1,
+   |     ^^^^^^^^^ ... also set here
+29 |     Foo.z: 1,
+...
+40 |         optional int32 z = 1000;
+   |                        - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message extension `buf.test.Foo.z` referenced incorrectly
+  --> testdata/options/values/message.proto:29:5
+   |
+29 |     Foo.z: 1,
+   |     ^^^^^ referenced here
+   |
+  help: reference it as `[buf.test.Foo.z]`
+   |
+29 | -     Foo.z: 1,
+29 | +     [buf.test.Foo.z]: 1,
+   |
+   |
+   = note: extension names must be surrounded by `[...]`
+
+error: message extension `buf.test.Foo.z` set multiple times
+  --> testdata/options/values/message.proto:29:5
+   |
+26 |     [Foo.z]: 1,
+   |     ------- first set here...
+27 |     (Foo.z): 1,
+28 |     ["Foo.z"]: 1,
+29 |     Foo.z: 1,
+   |     ^^^^^ ... also set here
+30 |     "Foo.z": 1,
+...
+40 |         optional int32 z = 1000;
+   |                        - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message extension `buf.test.Foo.z` referenced incorrectly
+  --> testdata/options/values/message.proto:30:5
+   |
+30 |     "Foo.z": 1,
+   |     ^^^^^^^ referenced here
+   |
+  help: reference it as `[buf.test.Foo.z]`
+   |
+30 | -     "Foo.z": 1,
+30 | +     [buf.test.Foo.z]: 1,
+   |
+   |
+   = note: extension names must be surrounded by `[...]`
+   = note: due to a parser quirk, `.protoc` rejects quoted strings here, even
+           though textproto does not
+
+error: message extension `buf.test.Foo.z` set multiple times
+  --> testdata/options/values/message.proto:30:5
+   |
+26 |     [Foo.z]: 1,
+   |     ------- first set here...
+27 |     (Foo.z): 1,
+28 |     ["Foo.z"]: 1,
+29 |     Foo.z: 1,
+30 |     "Foo.z": 1,
+   |     ^^^^^^^ ... also set here
+31 |     [buf.test.Foo.z]: 2,
+...
+40 |         optional int32 z = 1000;
+   |                        - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message extension `buf.test.Foo.z` set multiple times
+  --> testdata/options/values/message.proto:31:5
+   |
+26 |     [Foo.z]: 1,
+   |     ------- first set here...
+27 |     (Foo.z): 1,
+...
+30 |     "Foo.z": 1,
+31 |     [buf.test.Foo.z]: 2,
+   |     ^^^^^^^^^^^^^^^^ ... also set here
+32 |     [.buf.test.Foo.z]: 3,
+...
+40 |         optional int32 z = 1000;
+   |                        - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+error: message extension `buf.test.Foo.z` set multiple times
+  --> testdata/options/values/message.proto:32:5
+   |
+26 |     [Foo.z]: 1,
+   |     ------- first set here...
+27 |     (Foo.z): 1,
+...
+31 |     [buf.test.Foo.z]: 2,
+32 |     [.buf.test.Foo.z]: 3,
+   |     ^^^^^^^^^^^^^^^^^ ... also set here
+...
+40 |         optional int32 z = 1000;
+   |                        - not a repeated field
+   |
+   = note: a non-`repeated` option may be set at most once
+
+encountered 31 errors

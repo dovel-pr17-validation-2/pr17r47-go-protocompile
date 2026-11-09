@@ -1,0 +1,62 @@
+warning: `ctype` is deprecated in Edition 2023
+  --> testdata/options/validate/ctype_2023.proto:6:21
+   |
+ 1 | edition = "2023";
+   |           ------ edition specified here
+...
+ 6 |     string foo = 1 [ctype = STRING];
+   |                     ^^^^^
+  help: replace with `features.(pb.cpp).string_type`
+   |
+ 6 | -     string foo = 1 [ctype = STRING];
+ 6 | +     string foo = 1 [features.(pb.cpp).string_type = STRING];
+   |
+   = help: deprecated since Edition 2023, to be removed in Edition 2024
+
+warning: `ctype` is deprecated in Edition 2023
+  --> testdata/options/validate/ctype_2023.proto:7:21
+   |
+ 1 | edition = "2023";
+   |           ------ edition specified here
+...
+ 6 |     string foo = 1 [ctype = STRING];
+ 7 |     string bar = 2 [ctype = CORD];
+   |                     ^^^^^
+  help: replace with `features.(pb.cpp).string_type`
+   |
+ 7 | -     string bar = 2 [ctype = CORD];
+ 7 | +     string bar = 2 [features.(pb.cpp).string_type = CORD];
+   |
+   = help: deprecated since Edition 2023, to be removed in Edition 2024
+
+warning: `ctype` is deprecated in Edition 2023
+  --> testdata/options/validate/ctype_2023.proto:8:21
+   |
+ 1 | edition = "2023";
+   |           ------ edition specified here
+...
+ 7 |     string bar = 2 [ctype = CORD];
+ 8 |     string baz = 3 [ctype = STRING_PIECE];
+   |                     ^^^^^
+  help: replace with `features.(pb.cpp).string_type`
+   |
+ 8 | -     string baz = 3 [ctype = STRING_PIECE];
+ 8 | +     string baz = 3 [features.(pb.cpp).string_type = VIEW];
+   |
+   = help: deprecated since Edition 2023, to be removed in Edition 2024
+
+error: expected `string` or `bytes`, found scalar type `int32`
+  --> testdata/options/validate/ctype_2023.proto:10:5
+   |
+10 |     int32 i = 4 [ctype = CORD];
+   |     ^^^^^        ----- `ctype` set here
+
+error: cannot use `CORD` on an extension field
+  --> testdata/options/validate/ctype_2023.proto:16:5
+   |
+16 |     string x = 5 [ctype = CORD];
+   |     ^^^^^^^^^^^^^^^^^^^^^^----^^
+   |                            |
+   |                            `CORD` set here
+
+encountered 2 errors and 3 warnings

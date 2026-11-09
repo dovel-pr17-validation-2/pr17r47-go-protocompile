@@ -1,0 +1,163 @@
+descriptor: true
+source_code_info: true
+files:
+- path: "a1.proto"
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "b.proto";
+    import "c.proto";
+    import "d.proto";
+
+    message A1 {
+      B b = 1;
+      C c = 2;
+      D d = 3;
+    }
+
+- path: "a2.proto"
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "b.proto";
+    import "c.proto";
+    import "d.proto";
+
+    message A2 {
+    }
+
+- path: "a3.proto"
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "b.proto";
+    import "c.proto";
+    import "d.proto";
+
+    message A3 {
+      P p = 2;
+      D d = 3;
+    }
+
+- path: "a4.proto"
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "b.proto";
+    import "c.proto";
+    import "d.proto";
+
+    message A4 {
+      B b = 1;
+      P p = 2;
+      D d = 3;
+    }
+
+- path: "a5.proto"
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "b.proto";
+    import "c.proto";
+    import "d.proto";
+
+    message A5 {
+      C c = 1;
+      P p = 2;
+      D d = 3;
+    }
+
+- path: "a6.proto"
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "e.proto";
+    import "d.proto";
+
+    message A6 {
+      D d = 1;
+      E e = 2;
+    }
+
+- path: "a7.proto"
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "b.proto";
+    import "c.proto";
+    import "d.proto";
+
+    message A7 {
+      .buf.test.B b = 1;
+      .buf.test.C c = 2;
+      .buf.test.D d = 3;
+    }
+
+- path: "a8.proto"
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "b.proto";
+    import "c.proto";
+    import "d.proto";
+
+    message A8 {
+      .buf.test.B b = 1;
+      .buf.test.D d = 3;
+    }
+
+- path: "b.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    message B {}
+
+    import public "p.proto";
+
+- path: "c.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    message C {}
+
+    import public "p.proto";
+
+- path: "d.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    message D {}
+
+- path: "e.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    import "d.proto";
+
+    message E {
+      D d = 1;
+    }
+
+- path: "p.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package buf.test;
+
+    message P {}

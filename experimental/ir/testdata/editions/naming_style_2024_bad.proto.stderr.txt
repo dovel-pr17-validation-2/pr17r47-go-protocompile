@@ -1,0 +1,202 @@
+error: package name should be lower_snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:5:9
+   |
+ 5 | package Buf.Test; // Package must be lower_snake_case or dot.delimited.lower_snake_case
+   |         ^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires package names to be lower_snake_case or
+           dot.delimited.lower_snake_case
+
+error: message type name should be PascalCase
+  --> testdata/editions/naming_style_2024_bad.proto:7:9
+   |
+ 7 | message my_message {
+   |         ^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires message names to be PascalCase (e.g., MyMessage)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:8:10
+   |
+ 8 |   string myField = 1;     // camelCase field name
+   |          ^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:9:9
+   |
+ 9 |   int32 AnotherField = 2; // PascalCase field name
+   |         ^^^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:10:10
+   |
+10 |   string field_1 = 3;     // lower_snake_case or dot.delimited.lower_snake_case
+   |          ^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:11:10
+   |
+11 |   string _field = 4;      // Leading underscore
+   |          ^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:12:10
+   |
+12 |   string field_ = 5;      // Trailing underscore
+   |          ^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:13:10
+   |
+13 |   string field__name = 6; // Consecutive underscores
+   |          ^^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: oneof name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:14:9
+   |
+14 |   oneof TestChoice {      // PascalCase oneof
+   |         ^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires oneof names to be snake_case (e.g., my_choice)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:16:12
+   |
+16 |     string badChoice = 8; // camelCase field name
+   |            ^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: enum type name should be PascalCase
+  --> testdata/editions/naming_style_2024_bad.proto:20:6
+   |
+20 | enum my_enum {
+   |      ^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires enum names to be PascalCase (e.g., MyEnum)
+
+error: enum value name should be SCREAMING_SNAKE_CASE
+  --> testdata/editions/naming_style_2024_bad.proto:21:3
+   |
+21 |   unspecified = 0; // lowercase enum value
+   |   ^^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires enum value names to be SCREAMING_SNAKE_CASE (e.g.,
+           MY_VALUE)
+
+error: enum value name should be SCREAMING_SNAKE_CASE
+  --> testdata/editions/naming_style_2024_bad.proto:22:3
+   |
+22 |   valueOne = 1;    // camelCase enum value
+   |   ^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires enum value names to be SCREAMING_SNAKE_CASE (e.g.,
+           MY_VALUE)
+
+error: enum value name should be SCREAMING_SNAKE_CASE
+  --> testdata/editions/naming_style_2024_bad.proto:23:3
+   |
+23 |   _VALUE = 2;      // Leading underscore
+   |   ^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires enum value names to be SCREAMING_SNAKE_CASE (e.g.,
+           MY_VALUE)
+
+error: enum value name should be SCREAMING_SNAKE_CASE
+  --> testdata/editions/naming_style_2024_bad.proto:24:3
+   |
+24 |   VALUE_ = 3;      // Trailing underscore
+   |   ^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires enum value names to be SCREAMING_SNAKE_CASE (e.g.,
+           MY_VALUE)
+
+error: enum values have the same name with the `my_enum` prefix removed
+  --> testdata/editions/naming_style_2024_bad.proto:24:3
+   |
+23 |   _VALUE = 2;      // Leading underscore
+   |   ------ this implies canonical name `Value`
+24 |   VALUE_ = 3;      // Trailing underscore
+   |   ^^^^^^ this also implies that name
+
+error: enum value name should be SCREAMING_SNAKE_CASE
+  --> testdata/editions/naming_style_2024_bad.proto:25:3
+   |
+25 |   VALUE_1 = 4;     // Underscore followed by number
+   |   ^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires enum value names to be SCREAMING_SNAKE_CASE (e.g.,
+           MY_VALUE)
+
+error: service name should be PascalCase
+  --> testdata/editions/naming_style_2024_bad.proto:28:9
+   |
+28 | service My_Service { // Snake_Case service name
+   |         ^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires service names to be PascalCase (e.g., MyService)
+
+error: RPC method name should be PascalCase
+  --> testdata/editions/naming_style_2024_bad.proto:29:7
+   |
+29 |   rpc test_method(my_message) returns (my_message); // snake_case RPC method names
+   |       ^^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires RPC method names to be PascalCase (e.g.,
+           GetMessage)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:37:10
+   |
+37 |   string BadField = 2 [features.enforce_naming_style = STYLE2024];
+   |          ^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: message type name should be PascalCase
+  --> testdata/editions/naming_style_2024_bad.proto:38:11
+   |
+38 |   message bad_nested {
+   |           ^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires message names to be PascalCase (e.g., MyMessage)
+
+error: field name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:41:12
+   |
+41 |     string _bad_field = 1;
+   |            ^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires field names to be snake_case (e.g., my_field)
+
+error: extension name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:51:10
+   |
+51 |   string BadExtension = 1;
+   |          ^^^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires extension names to be snake_case (e.g.,
+           my_extension)
+
+error: extension name should be snake_case
+  --> testdata/editions/naming_style_2024_bad.proto:52:10
+   |
+52 |   string _bad_extension = 2;
+   |          ^^^^^^^^^^^^^^ this name violates STYLE2024
+   |
+   = help: STYLE2024 requires extension names to be snake_case (e.g.,
+           my_extension)
+
+encountered 24 errors

@@ -1,0 +1,48 @@
+symtab: true
+exclude: "unused import"
+files:
+- path: "main.proto"
+  text: |
+    syntax = "proto2";
+    package dep.foo;
+
+    import "dep/foo.proto";
+
+    message Main {}
+    message Main {
+      optional int32 x = 1;
+    }
+
+    message Foo {
+      enum BAR {
+        BAR = 0;
+      }
+    }
+
+    message Main {
+      optional string x = 2;
+    }
+
+- path: "main2.proto"
+  text: |
+    syntax = "proto2";
+    package dep.foo.Foo;
+
+    import "dep/foo.proto";
+
+
+- path: "dep/foo.proto"
+  text: |
+    syntax = "proto2";
+    package dep.foo;
+
+    import "dep/priv.proto";
+
+    message Foo {}
+
+- path: "dep/priv.proto"
+  text: |
+    syntax = "proto2";
+    package dep.foo;
+
+    message Main {}

@@ -1,0 +1,29 @@
+# buf.compiler.v1.Report
+
+files:
+  - path: "foo.proto"
+    text: "syntax = \"proto4\"\npackage abc.xyz;\nmessage Blah {\n\trequired size_t x = 0;\n\tmessage Bonk {\n\t\tfield\n \tfield\n    field}\n\t}\n"
+
+diagnostics:
+  - message: tabstop
+    level: LEVEL_WARNING
+    annotations:
+    - message: "this is in front of some tabstops"
+      file: 0
+      start: 92
+      end: 97
+    - message: "specifically these"
+      file: 0
+      start: 90
+      end: 92
+  - message: partial tabstop
+    level: LEVEL_WARNING
+    annotations:
+    - message: "tabstop"
+      file: 0
+      start: 99
+      end: 100
+    - message: "spaces"
+      file: 0
+      start: 98
+      end: 99

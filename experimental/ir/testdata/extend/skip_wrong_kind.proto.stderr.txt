@@ -1,0 +1,17 @@
+error: expected message type, found enum value `test.M.P.N`
+  --> testdata/extend/skip_wrong_kind.proto:11:16
+   |
+10 |         enum X { N = 1; }
+   |                  - defined here
+11 |         extend N {  // Does not skip .test.M.P.N
+   |                ^ expected message type
+
+error: expected message type, found enum type `test.M.Q.N`
+  --> testdata/extend/skip_wrong_kind.proto:18:16
+   |
+17 |         enum N { Q = 1; }
+   |              - defined here
+18 |         extend N {  // Does not skip .test.M.Q.N
+   |                ^ expected message type
+
+encountered 2 errors

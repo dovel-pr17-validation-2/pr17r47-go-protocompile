@@ -1,0 +1,41 @@
+# Tests that a genuinely broken descriptor.proto (missing required symbols
+# like FileOptions, MessageOptions, FieldOptions) is diagnosed by the
+# compiler with one error per missing required symbol, attached to
+# descriptor.proto itself rather than to the user's proto file.
+#
+# The user file additionally sets `option go_package = ...` so we exercise
+# the optionRef.resolve guard against a zero `field` builtin: with FileOptions
+# unresolved, lowering would otherwise panic when constructing an options
+# message rooted at the unresolved builtin.
+exclude_wkt_sources: true
+descriptor: true
+symtab: true
+files:
+- path: "google/protobuf/descriptor.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package google.protobuf;
+
+    message FileDescriptorProto {
+      optional string name = 1;
+    }
+
+    message DescriptorProto {
+      optional string name = 1;
+    }
+
+    message FieldDescriptorProto {
+      optional string name = 1;
+    }
+
+- path: "test.proto"
+  text: |
+    syntax = "proto3";
+    package test;
+
+    option go_package = "example.com";
+
+    message Simple {
+      string name = 1;
+    }

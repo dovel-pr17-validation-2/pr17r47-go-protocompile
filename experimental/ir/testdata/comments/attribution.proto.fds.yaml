@@ -1,0 +1,67 @@
+file:
+- name: "testdata/comments/attribution.proto"
+  package: "buf.test"
+  dependency: ["google/protobuf/descriptor.proto"]
+  public_dependency: [0]
+  message_type:
+  - name: "Foo"
+    field:
+    - name: "baz"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "baz"
+    - name: "options"
+      number: 11
+      label: LABEL_REPEATED
+      type: TYPE_INT32
+      json_name: "options"
+      options:
+        features.repeated_field_encoding: PACKED
+        $unknown: "1000: {`0f10`}"
+    options.$unknown: "1000: {`0a14`}"
+    reserved_range:
+    - { start: 2, end: 3 }
+    - { start: 3, end: 5 }
+    - { start: 5, end: 11 }
+    reserved_name: ["foo", "bar"]
+  - name: "Bar"
+    field:
+    - name: "bar"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "bar"
+    - name: "barbar"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "barbar"
+  - name: "Qux"
+  enum_type: [{ name: "Baz", value: [{ name: "BAZ_ONE", number: 0 }] }]
+  service:
+  - name: "FooService"
+    method:
+    - name: "FooForBar"
+      input_type: ".buf.test.Bar"
+      output_type: ".buf.test.Foo"
+    - name: "BarForBar"
+      input_type: ".buf.test.Bar"
+      output_type: ".buf.test.Bar"
+      options: {}
+  extension:
+  - name: "c"
+    number: 1000
+    label: LABEL_REPEATED
+    type: TYPE_INT32
+    extendee: ".google.protobuf.FieldOptions"
+    json_name: "c"
+  - name: "a"
+    number: 1000
+    label: LABEL_REPEATED
+    type: TYPE_INT32
+    extendee: ".google.protobuf.MessageOptions"
+    json_name: "a"
+  options: { java_package: "build.buf.protocompile", java_multiple_files: true }
+  syntax: "editions"
+  edition: EDITION_2023

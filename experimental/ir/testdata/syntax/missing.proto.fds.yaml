@@ -1,0 +1,1 @@
+file: [{ name: "testdata/syntax/missing.proto", package: "buf.test" }]

@@ -1,0 +1,38 @@
+exclude: "unused import"
+files:
+- path: "a.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package test;
+
+    message M {
+      extensions 1 to max;
+    }
+
+- path: "b.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package test;
+
+    import "a.proto";
+
+- path: "c.proto"
+  text: |
+    syntax = "proto2";
+    package test;
+    
+    import "b.proto";
+
+    extend M {
+      optional int32 a = 1;
+    }
+
+    extend test.M {
+      optional int32 b = 2;
+    }
+
+    extend .test.M {
+      optional int32 c = 3;
+    }

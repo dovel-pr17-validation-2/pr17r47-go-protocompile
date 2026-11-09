@@ -1,0 +1,49 @@
+error: unexpected `export` modifier on message field
+  --> testdata/parser/def/2024.proto:8:5
+   |
+ 8 |     export int32 x = 1;
+   |     ^^^^^^
+  help: delete it
+   |
+ 8 | -     export int32 x = 1;
+ 8 | +     int32 x = 1;
+   |
+   = help: `export` only applies to a type definition
+
+error: unexpected `local` modifier on message field
+  --> testdata/parser/def/2024.proto:9:5
+   |
+ 9 |     local int32 y = 1;
+   |     ^^^^^
+  help: delete it
+   |
+ 9 | -     local int32 y = 1;
+ 9 | +     int32 y = 1;
+   |
+   = help: `local` only applies to a type definition
+
+error: unexpected `export` modifier on service definition
+  --> testdata/parser/def/2024.proto:16:1
+   |
+16 | export service S1 {}
+   | ^^^^^^
+  help: delete it
+   |
+16 | - export service S1 {}
+16 | + service S1 {}
+   |
+   = help: `export` only applies to a type definition
+
+error: unexpected `local` modifier on service definition
+  --> testdata/parser/def/2024.proto:17:1
+   |
+17 | local service S2 {}
+   | ^^^^^
+  help: delete it
+   |
+17 | - local service S2 {}
+17 | + service S2 {}
+   |
+   = help: `local` only applies to a type definition
+
+encountered 4 errors

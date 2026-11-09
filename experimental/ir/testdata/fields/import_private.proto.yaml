@@ -1,0 +1,30 @@
+exclude: "unused import"
+files:
+- path: "a.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package test;
+
+    message M {}
+
+- path: "b.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package test;
+
+    import "a.proto";
+
+- path: "c.proto"
+  text: |
+    syntax = "proto3";
+    package test;
+    
+    import "b.proto";
+
+    message N {
+      M m1 = 1;
+      test.M m2 = 2;
+      .test.M m3 = 3;
+    }

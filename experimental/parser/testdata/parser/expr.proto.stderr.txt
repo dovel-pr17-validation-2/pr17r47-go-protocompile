@@ -1,0 +1,57 @@
+error: unexpected range expression in option setting value
+  --> testdata/parser/expr.proto:7:21
+   |
+ 7 | option (test.any) = 1 to 100;
+   |                     ^^^^^^^^
+
+error: unexpected array expression in option setting value
+  --> testdata/parser/expr.proto:8:21
+   |
+ 8 | option (test.any) = [1, 2, 3];
+   |                     ^^^^^^^^^
+   = note: array expressions can only appear inside of message expressions
+
+error: unexpected array expression in option setting value
+  --> testdata/parser/expr.proto:30:21
+   |
+30 | option (test.bad) = [1: 2];
+   |                     ^^^^^^
+   = note: array expressions can only appear inside of message expressions
+
+error: unexpected integer literal in message expression
+  --> testdata/parser/expr.proto:31:22
+   |
+31 | option (test.bad) = {1, 2, 3};
+   |                      ^ expected message field value
+
+error: unexpected integer literal in message expression
+  --> testdata/parser/expr.proto:31:25
+   |
+31 | option (test.bad) = {1, 2, 3};
+   |                         ^ expected message field value
+
+error: unexpected integer literal in message expression
+  --> testdata/parser/expr.proto:31:28
+   |
+31 | option (test.bad) = {1, 2, 3};
+   |                            ^ expected message field value
+
+error: unexpected `;` after `-`
+  --> testdata/parser/expr.proto:32:22
+   |
+32 | option (test.bad) = -;
+   |                      ^ expected expression
+
+error: unexpected range expression in option setting value
+  --> testdata/parser/expr.proto:33:21
+   |
+33 | option (test.bad) = 1 to;
+   |                     ^^^^
+
+error: unexpected `;` after `to`
+  --> testdata/parser/expr.proto:33:25
+   |
+33 | option (test.bad) = 1 to;
+   |                         ^ expected expression
+
+encountered 9 errors

@@ -1,0 +1,25 @@
+warning: non-canonical string literal in import
+  --> testdata/parser/import/escapes.proto:5:8
+   |
+ 5 | import "foo\x2eproto";
+   |        ^^^^^^^^^^^^^^
+  help: replace it with a canonical string
+   |
+ 5 | - import "foo\x2eproto";
+ 5 | + import "foo.proto";
+   |
+
+warning: non-canonical string literal in import
+  --> testdata/parser/import/escapes.proto:6:8
+   |
+ 6 | import "bar" ".proto";
+   |        ^^^^^^^^^^^^^^
+  help: replace it with a canonical string
+   |
+ 6 | - import "bar" ".proto";
+ 6 | + import "bar.proto";
+   |
+   = note: Protobuf implicitly concatenates adjacent string literals, like C or
+           Python; this can lead to surprising behavior
+
+encountered 2 warnings

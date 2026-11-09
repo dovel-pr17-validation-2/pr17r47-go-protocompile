@@ -1,0 +1,31 @@
+exclude: "unused import"
+files:
+- path: "main.proto"
+  text: |
+    syntax = "proto2";
+    package foo.bar;
+
+    import "nested/path.proto";
+    import "nested//path.proto";
+    import "./local.proto";
+    import "local.proto";
+    import "fake/../local.proto";
+    import "../up.proto";
+
+- path: "nested/path.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package foo.bar;
+
+- path: "local.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package foo.bar;
+
+- path: "../up.proto"
+  import: true
+  text: |
+    syntax = "proto2";
+    package foo.bar;

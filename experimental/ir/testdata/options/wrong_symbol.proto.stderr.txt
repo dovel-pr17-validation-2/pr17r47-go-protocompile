@@ -1,0 +1,50 @@
+error: expected `google.protobuf.FieldOptions` extension, found message
+       extension in `google.protobuf.MessageOptions`
+  --> testdata/options/wrong_symbol.proto:9:9
+   |
+ 9 |           (x) = 42,
+   |           ^^^ because of this field selector
+10 |           (z) = 42,
+...
+16 | / extend google.protobuf.MessageOptions {
+17 | |     optional int32 x = 1000;
+   | |                    - `buf.test.x` defined here
+18 | | }
+   | \_- ... within this message extension block
+
+error: expected `google.protobuf.FieldOptions` extension, found message field in
+       `buf.test.Foo`
+  --> testdata/options/wrong_symbol.proto:10:9
+   |
+ 7 | / message Foo {
+ 8 | |     optional int32 z = 1 [
+   | |                    - `buf.test.Foo.z` defined here
+ 9 | |         (x) = 42,
+10 | |         (z) = 42,
+   | |         ^^^ because of this field selector
+11 | |         (Foo) = 42,
+...  |
+14 | | }
+   | \_- ... within this message definition
+
+error: expected message extension, found message type `buf.test.Foo`
+  --> testdata/options/wrong_symbol.proto:11:10
+   |
+ 7 | message Foo {
+   |         --- defined here
+...
+10 |         (z) = 42,
+11 |         (Foo) = 42,
+   |          ^^^ expected message extension
+
+error: expected message extension, found `package` declaration `buf.test`
+  --> testdata/options/wrong_symbol.proto:12:10
+   |
+ 3 | package buf.test;
+   | ----------------- defined here
+...
+11 |         (Foo) = 42,
+12 |         (buf.test) = 42
+   |          ^^^^^^^^ expected message extension
+
+encountered 4 errors

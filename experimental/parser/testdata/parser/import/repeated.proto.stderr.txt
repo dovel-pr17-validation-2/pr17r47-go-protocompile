@@ -1,0 +1,12 @@
+warning: non-canonical string literal in import
+  --> testdata/parser/import/repeated.proto:6:8
+   |
+ 6 | import "foo\x2eproto";
+   |        ^^^^^^^^^^^^^^
+  help: replace it with a canonical string
+   |
+ 6 | - import "foo\x2eproto";
+ 6 | + import "foo.proto";
+   |
+
+encountered 1 warning

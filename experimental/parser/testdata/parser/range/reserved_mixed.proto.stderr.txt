@@ -1,0 +1,76 @@
+error: cannot mix tags and names in reserved range
+  --> testdata/parser/range/reserved_mixed.proto:6:17
+   |
+ 6 |     reserved 5, "foo";
+   |              -  ^^^^^ this field name must go in its own reserved range
+   |              |
+   |              but expected a field tag because of this
+   |
+  help: split the reserved range
+   |
+ 6 | -     reserved 5, "foo";
+ 6 | +     reserved 5;
+ 7 | +     reserved "foo";
+   |
+
+error: cannot mix tags and names in reserved range
+  --> testdata/parser/range/reserved_mixed.proto:7:21
+   |
+ 7 |     reserved "foo", 5;
+   |              -----  ^ this field tag must go in its own reserved range
+   |               |
+   |               but expected a field name because of this
+   |
+  help: split the reserved range
+   |
+ 7 | -     reserved "foo", 5;
+ 7 | +     reserved "foo";
+ 8 | +     reserved 5;
+   |
+
+error: cannot mix tags and names in reserved range
+  --> testdata/parser/range/reserved_mixed.proto:8:17
+   |
+ 8 |     reserved 5, "foo", 5;
+   |              -  ^^^^^ this field name must go in its own reserved range
+   |              |
+   |              but expected a field tag because of this
+   |
+  help: split the reserved range
+   |
+ 8 | -     reserved 5, "foo", 5;
+ 8 | +     reserved 5, 5;
+ 9 | +     reserved "foo";
+   |
+
+error: cannot mix tags and names in reserved range
+  --> testdata/parser/range/reserved_mixed.proto:9:21
+   |
+ 9 |     reserved "foo", 5, "foo";
+   |              -----  ^ this field tag must go in its own reserved range
+   |               |
+   |               but expected a field name because of this
+   |
+  help: split the reserved range
+   |
+ 9 | -     reserved "foo", 5, "foo";
+ 9 | +     reserved "foo", "foo";
+10 | +     reserved 5;
+   |
+
+error: cannot mix tags and names in reserved range
+  --> testdata/parser/range/reserved_mixed.proto:10:17
+   |
+10 |     reserved 5, "foo", 5, "foo", 5, 5;
+   |              -  ^^^^^ this field name must go in its own reserved range
+   |              |
+   |              but expected a field tag because of this
+   |
+  help: split the reserved range
+   |
+10 | -     reserved 5, "foo", 5, "foo", 5, 5;
+10 | +     reserved 5, 5, 5, 5;
+11 | +     reserved "foo", "foo";
+   |
+
+encountered 5 errors

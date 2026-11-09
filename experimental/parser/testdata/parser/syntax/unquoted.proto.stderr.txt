@@ -1,0 +1,11 @@
+error: the value of a `syntax` declaration must be a string literal
+  --> testdata/parser/syntax/unquoted.proto:1:10
+   |
+ 1 | syntax = proto2;
+   |          ^^^^^^
+  help: add quotes to make this a string literal
+   |
+ 1 | syntax = "proto2";
+   |          +      +
+
+encountered 1 error

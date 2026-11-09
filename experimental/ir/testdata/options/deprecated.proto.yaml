@@ -1,0 +1,54 @@
+files:
+- path: "test.proto"
+  text: |
+    syntax = "proto3";
+    package test;
+
+    import "deprecated.proto";
+
+    message M {
+      Foo foo = 1 [
+        (ext).foo.foo = {
+          foo {}
+          bar: Z
+          bar: X
+          bar: [X, X]
+        },
+        (ext).foo.bar = X,
+        (ext).foo.bar = X
+      ];
+    }
+
+    service S2 {
+      rpc X2(Foo) returns (Foo);
+    }
+
+- path: "deprecated.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package test;
+
+    import "google/protobuf/descriptor.proto";
+
+    option deprecated = true;
+
+    message Foo {
+      option deprecated = true;
+
+      Foo foo = 1 [deprecated = true];
+      repeated Bar bar = 2 [deprecated = true];
+    }
+
+    enum Bar {
+      Z = 0;
+      X = 1 [deprecated = true];
+    }
+
+    service S {
+      rpc X(Foo) returns (Foo); // Should not warn.
+    }
+
+    extend google.protobuf.FieldOptions {
+      Foo ext = 10000;
+    }

@@ -1,0 +1,26 @@
+# Tests that multi-component relative name resolution works when the first
+# component resolves to an intermediate package prefix, not a full package name.
+#
+# For example, resolving "b.v1.Msg" from package "a.b.c.v1" requires "a.b" to
+# exist as a package scope, even though no file declares "package a.b;".
+descriptor: true
+exclude: "unused import"
+files:
+- path: "dep.proto"
+  import: true
+  text: |
+    syntax = "proto3";
+    package a.b.v1;
+
+    message Msg {}
+
+- path: "main.proto"
+  text: |
+    syntax = "proto3";
+    package a.b.c.v1;
+
+    import "dep.proto";
+
+    message Use {
+      b.v1.Msg m = 1;
+    }

@@ -1,0 +1,54 @@
+error: unexpected import within message definition
+  --> testdata/parser/import/in_message.proto:6:5
+   |
+ 5 | / message M {
+ 6 | |     import "foo.proto";
+   | |     ^^^^^^^^^^^^^^^^^^^ this import...
+ 7 | |     import public "foo.proto";
+...  |
+11 | | }
+   | \_- ...cannot be declared within this message definition
+   |
+   = help: this import can only appear at file scope
+
+error: unexpected import within message definition
+  --> testdata/parser/import/in_message.proto:7:5
+   |
+ 5 | / message M {
+ 6 | |     import "foo.proto";
+ 7 | |     import public "foo.proto";
+   | |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ this import...
+ 8 | |     import weak "foo.proto";
+...  |
+11 | | }
+   | \_- ...cannot be declared within this message definition
+   |
+   = help: this import can only appear at file scope
+
+error: unexpected import within message definition
+  --> testdata/parser/import/in_message.proto:8:5
+   |
+ 5 | / message M {
+ 6 | |     import "foo.proto";
+ 7 | |     import public "foo.proto";
+ 8 | |     import weak "foo.proto";
+   | |     ^^^^^^^^^^^^^^^^^^^^^^^^ this import...
+...  |
+11 | | }
+   | \_- ...cannot be declared within this message definition
+   |
+   = help: this import can only appear at file scope
+
+error: unexpected import within message definition
+  --> testdata/parser/import/in_message.proto:10:5
+   |
+ 5 | / message M {
+...  |
+10 | |     import foo.proto;
+   | |     ^^^^^^^^^^^^^^^^^ this import...
+11 | | }
+   | \_- ...cannot be declared within this message definition
+   |
+   = help: this import can only appear at file scope
+
+encountered 4 errors

@@ -1,0 +1,6 @@
+exclude_wkt_sources: true
+files:
+- path: "a.proto"
+  text: |
+    syntax = "proto3";
+    package test;

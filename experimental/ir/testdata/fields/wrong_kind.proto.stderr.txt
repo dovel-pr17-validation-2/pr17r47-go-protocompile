@@ -1,0 +1,37 @@
+error: expected type, found message field `test.Foo.x`
+  --> testdata/fields/wrong_kind.proto:8:5
+   |
+ 8 |     x x = 1;
+   |     ^ - defined here
+   |     |
+   |     expected type
+
+error: expected type, found enum value `test.Foo.BAZ`
+  --> testdata/fields/wrong_kind.proto:9:5
+   |
+ 6 |     enum Bar { BAZ = 0; }
+   |                --- defined here
+ 7 |
+ 8 |     x x = 1;
+ 9 |     BAZ y = 2;
+   |     ^^^ expected type
+
+error: expected type, found `package` declaration `test`
+  --> testdata/fields/wrong_kind.proto:10:5
+   |
+ 3 | package test;
+   | ------------- defined here
+...
+ 9 |     BAZ y = 2;
+10 |     test z = 3;
+   |     ^^^^ expected type
+
+error: expected type, found oneof definition `test.Foo.self`
+  --> testdata/fields/wrong_kind.proto:13:9
+   |
+12 |     oneof self {
+   |           ---- defined here
+13 |         self a = 4;
+   |         ^^^^ expected type
+
+encountered 4 errors
